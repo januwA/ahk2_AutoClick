@@ -1,16 +1,20 @@
 ﻿#Requires AutoHotkey v2.0
 
 global loop_delay := 30 ; 点击延迟
+global f_key := 1 ; 点击延迟
 
 ; 配置窗口表单
 MyGui := Gui("+Resize", "配置")
 MyGui.AddText(, "点击间隔(ms):")
+MyGui.AddText(, "f连发:")
 MyGui.AddEdit("vloop_delay ym w100", loop_delay)  ; ym 选项开始一个新的控件列.
+MyGui.AddCheckbox("vf_key Checked" f_key, "")
 MyGui.AddButton("default", "OK").OnEvent("Click", ProcessUserInput)
 
 ProcessUserInput(*) {
   Saved := MyGui.Submit()  ; 将命名控件的内容保存到一个对象中.
   global loop_delay := Integer(Saved.loop_delay)
+  global f_key := Saved.f_key
 }
 
 ; 在托盘菜单中加上配置按钮
@@ -21,12 +25,15 @@ ConfigCallback(*) {
 
 ~f:: ; 按下f键 拾取
 {
-  loop {
+  if (!f_key) {
+    return
+  }
+  loop 20 {
     SendEvent "{f}"
-    Sleep loop_delay
-    if (!GetKeyState("f", "P")) { ; 抬起f键
-      break
-    }
+    Sleep 100
+    ; if (!GetKeyState("f", "P")) { ; 抬起f键
+    ;   break
+    ; }
   }
 }
 
