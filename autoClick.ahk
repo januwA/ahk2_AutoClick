@@ -23,6 +23,11 @@ ConfigCallback(*) {
   MyGui.Show()
 }
 
+~f12::
+{
+  global f_key := not f_key
+}
+
 ~f:: ; 按下f键 拾取
 {
   if (!f_key) {
