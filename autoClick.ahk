@@ -1,7 +1,7 @@
 ﻿#Requires AutoHotkey v2.0
 
-global loop_delay := 30 ; 点击延迟
-global f_key := 1 ; 点击延迟
+global loop_delay := 300 ; 点击延迟
+global f_key := 1 ; f键连发
 
 ; 配置窗口表单
 MyGui := Gui("+Resize", "配置")
