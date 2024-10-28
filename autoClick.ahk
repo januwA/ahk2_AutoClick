@@ -26,6 +26,8 @@ ConfigCallback(*) {
 ~f12::
 {
   global f_key := not f_key
+  TrayTip
+  TrayTip( (f_key ? "[启动]" : "[关闭]") . " f连发")
 }
 
 ~f:: ; 按下f键 拾取
@@ -63,11 +65,13 @@ SetKeyDelay -1
 ~Insert:: ; 按下开关，启动
 {
   TraySetIcon(A_AhkPath, 2)
+
   loop {
     Sleep loop_delay
     SendEvent "{Click}"
     if (!GetKeyState("Insert", "T")) { ; 再次按下开关，关闭
       TraySetIcon(A_AhkPath, 1)
+
       break
     }
   }
