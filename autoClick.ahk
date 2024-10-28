@@ -27,7 +27,7 @@ ConfigCallback(*) {
 {
   global f_key := not f_key
   TrayTip
-  TrayTip( (f_key ? "[启动]" : "[关闭]") . " f连发")
+  TrayTip((f_key ? "[启动]" : "[关闭]") . " f连发")
 }
 
 ~f:: ; 按下f键 拾取
@@ -58,6 +58,23 @@ ConfigCallback(*) {
 ~RButton up::
 {
   Pause(0)
+}
+
+~PgUp::
+{
+  global loop_delay += 100
+  TrayTip
+  TrayTip("[延迟] " . loop_delay)
+}
+~PgDn::
+{
+  if (loop_delay - 100 < 30) {
+    global loop_delay := 30
+  } else {
+    global loop_delay -= 100
+  }
+  TrayTip
+  TrayTip("[延迟] " . loop_delay)
 }
 
 SetKeyDelay -1
