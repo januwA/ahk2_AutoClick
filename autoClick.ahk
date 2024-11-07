@@ -79,14 +79,20 @@ ConfigCallback(*) {
 
 SetKeyDelay -1
 
-~Insert:: ; 按下开关，启动
+~^w:: {
+  Click 'down'
+  Sleep 300
+  Click 'up'
+}
+
+~`:: ; 按下开关，启动
 {
   TraySetIcon(A_AhkPath, 2)
 
   loop {
     Sleep loop_delay
     SendEvent "{Click}"
-    if (!GetKeyState("Insert", "T")) { ; 再次按下开关，关闭
+    if (!GetKeyState("``", "T")) { ; 再次按下开关，关闭
       TraySetIcon(A_AhkPath, 1)
 
       break
